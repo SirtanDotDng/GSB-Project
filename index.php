@@ -22,11 +22,11 @@ $connexion = true;
                     <div class="title">CONNEXION</div>
                 </div>
 
-                        <form method="post" action="connexion.php" style="padding: 0px 50px 0px 50px">
+                        <form method="post" action="pages/login.php" style="padding: 0px 50px 0px 50px">
                             <fieldset>
                                 <legend style="text-align:center">IDENTIFIANTS DE CONNEXION</legend>
                                 <div>
-                                    <label for="pseudo">ADRESSE EMAIL</label>
+                                    <label for="mail">ADRESSE EMAIL</label>
                                 </div>
                                 <div>
                                     <input style="width:100%;" placeholder="exemple@mail.com" class="casesinput" type="email" name="mail" id="mail" value="<?php  if(isset($_COOKIE['mail'])){ echo $_COOKIE['mail'];}?>" required/>
@@ -51,12 +51,11 @@ $connexion = true;
                     <img style='margin-top:1rem; border-radius:16px 16px 16px 16px; width:100%; height:20rem; object-fit:cover;' src='images/register.jpg'>
                     <div class="title">INSCRIPTION</div>
                 </div>
-
-                        <form method="post" action="register.php" style="padding: 0px 50px 0px 50px">
+                        <form method="post" action="pages/register.php" style="padding: 0px 50px 0px 50px">
                             <fieldset>
                                 <legend style="text-align:center">IDENTIFIANTS DE CONNEXION</legend>
                                 <div>
-                                    <label for="pseudo">ADRESSE EMAIL</label>
+                                    <label for="mail">ADRESSE EMAIL</label>
                                 </div>
                                 <div>
                                     <input style="width:100%;" placeholder="exemple@mail.com" class="casesinput" type="email" name="mail" id="mail" value="<?php  if(isset($_COOKIE['mail'])){ echo $_COOKIE['mail'];}?>" required/>
