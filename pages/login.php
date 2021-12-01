@@ -1,13 +1,9 @@
 <?php 
-require('../includes/bd.php'); 
-require('../includes/fonctions.php');
-?>
-
-<?php 
 
 $mail = $_POST['mail'];
-$password = $_POST['password'];
+$password = $_POST['pass'];
 
+require('../includes/fonctions.php');
 login($mail, $password);
 
 ?>
