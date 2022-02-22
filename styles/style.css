@@ -1,51 +1,175 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300&display=swap');
+/*https://coolors.co/000000-272727-585858-924635-cc3311-e69988-ffffff*/
+
 body {
-background-color:#CAF0F8;
-font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: #EDFAFD;
+  min-height: 100vh;
+}
+
+h1 {
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  color:#023E8A;
+}
+
+.navMenu {
+  padding:1%;
+  background-color: #023E8A;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navMenu a {
+  margin-top:25px;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  font-size: 22px;
+  display: inline-block;
+  width: 100%;
+  transition-duration: 0.3s;
+  transition-delay: 0s;
+  text-align:center;
+}
+
+.navMenu a:hover {
+  color: #CAF0F8;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+form {
+  padding: 4%;
+  background-color: #ffffff;
+  border: 0px;
+  border-radius:16px; 
+}
+
+form input {
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  height: 2rem;
+  padding-left: 1.5%;
+  box-shadow: inset 2px 2px 6px 0px rgba(0, 0, 128, 0.25);
+  font-size: 18px;
+}
+
+form textarea {
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  height: 5rem;
+  padding-left: 1.5%;
+  box-shadow: inset 2px 2px 6px 0px rgba(0, 0, 128, 0.25);
+  font-size: 18px;
+}
+
+option {
+  width: 100%;
+  border: 0px;
+  border-radius: 8px;
+  height: 4rem;
+  padding-left: 1.5%;
+  box-shadow: inset 2px 2px 6px 0px rgba(0, 0, 128, 0.25);
+  font-size: 18px;
+}
+
+.loginForm {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding-top: 6rem;
+}
+
+.a1 {
+  background-color: #EDFAFD;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size:18px;
+  padding-top:2%;
+  padding-right:2%;
+  padding-left:2%;
+  padding-bottom:5%;
+  min-height: 76.2vh;
+}
+
+.content{
+  flex: 1;
+}
+
+.container .title {
+  position: absolute;
+  top: 27.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: 6px;
+  font-size: 48px;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.container img {
+  margin-top:2%;
+  margin-bottom:5%;
+  border-radius:8px;
+  width:100%;
+  height: 20rem;
+  object-fit: cover;
 }
 
 legend {
-    margin-bottom: 2rem;
-    font-size: 24px;
+  text-align: center;
 }
 
-fieldset {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-    border: 0px;
-    font-size: 16px;
+.card {
+  width: 50rem; 
+  border-radius:8px;
+  border: 0px;
+  box-shadow: 4px 4px 32px 0px rgba(0, 0, 128, 0.25);
 }
 
-input {
-    border: 0px;
-    height: 3rem;
-    box-shadow: inset 2px 2px 8px 0px rgba(0,0,0,0.2) ;
-    background-color: #EDFAFD;
-    border-radius:8px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 20px;
-    padding-left: 1rem;
+footer {
+  padding:2%;
+  background-color: #023E8A;
+  display: flex;
+  justify-content: space-around;
+  color:white;
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
 }
-.container {
-    position: relative;
-    text-align: center;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-.title {
-    position: absolute;
-    top: 56%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    letter-spacing: 5px;
-    font-size: 48px;
-  }
+.logo {
+ height: 5rem;
+ object-fit:cover;
+}
 
-.card{
-    background-color: #EDFAFD;
-    border: 0px;
-    margin: 1rem;
+.list {
+	width:100%;
+    padding:5%;
+  	background-color:white;
+  	border-radius:8px;
+  	box-shadow: 4px 4px 32px 0px rgba(0, 0, 128, 0.25);
+}
+
+.row {
+ 	border-bottom: 1px solid #023E8A;
+  	padding-top:5px;
+  	padding-bottom:5px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #EDFAFD;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E62B4;
+  padding:1px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3485E0;
 }
