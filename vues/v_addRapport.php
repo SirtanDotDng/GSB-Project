@@ -154,15 +154,16 @@
 			var table = document.getElementById(tableID);
 			var rowCount = table.rows.length;
 			for(var i=0; i<rowCount; i++) {
-            	a--;
+            	//ouais
 				var row = table.rows[i];
 				var chkbox = row.cells[0].childNodes[0];
 				if(null != chkbox && true == chkbox.checked) {
 					if(rowCount <= 1) {
-						alert("Cannot delete all the rows.");
+						alert("Vous ne pouvez pas supprimer toutes les lignes.");
 						break;
 					}
 					table.deleteRow(i);
+                    a--;
 					rowCount--;
 					i--;
 				}
