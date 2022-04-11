@@ -22,6 +22,9 @@ switch ($c) {
   case "menu" :
     include('controllers/c_menu.php');
     break;
+  case "rapports" :
+    include('controllers/c_rapports.php');
+    break;
   default :
     include('controllers/c_compte.php');
     break;

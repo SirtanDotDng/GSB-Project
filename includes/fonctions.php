@@ -70,6 +70,23 @@ function getListePra() {
   }
 }
 
+function getListePraRap() {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT praticien.PRA_NOM, praticien.PRA_PRENOM, praticien.PRA_NUM FROM `praticien` INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE COL_MATRICULE = ? GROUP BY rapport_visite.PRA_NUM";
+  $query = $monPdo->prepare($req);
+  $query->execute(array($_SESSION['matricule']));
+  $lesLignes=$query->fetchAll();
+  return $lesLignes;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
 function getLePra($idPra) {
   try
   {
@@ -145,6 +162,29 @@ function getLesRapports() {
   $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ?";
   $query=$monPdo->prepare($req);
   $query->execute(array($_SESSION['matricule']));
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getLesRapportsDate($date1, $date2) {
+  try
+  {
+  $monPdo = connexionPDO();
+  if(isset($_POST['idPra']) && $_POST['idPra'] != 'aucun'){
+    $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_saisie_date >= ? AND RAP_saisie_date <= ? AND PRA_NUM = ?";
+  	$query=$monPdo->prepare($req);
+  	$query->execute(array($_SESSION['matricule'], $date1, $date2, $_POST['idPra']));
+  }else{
+  	$req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_saisie_date >= ? AND RAP_saisie_date <= ?";
+  	$query=$monPdo->prepare($req);
+  	$query->execute(array($_SESSION['matricule'], $date1, $date2));
+  }
   $res=$query->fetchAll();
   return $res;
   }

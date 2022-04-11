@@ -37,14 +37,15 @@ h1 {
 .navMenu a:hover {
   color: #CAF0F8;
   text-decoration: none;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 form {
-  padding: 4%;
+  padding: 5%;
   background-color: #ffffff;
   border: 0px;
-  border-radius:16px; 
+  border-radius:8px; 
+  margin-bottom: 2.5%;
 }
 
 form input {
@@ -73,6 +74,17 @@ option {
   border-radius: 8px;
   height: 4rem;
   padding-left: 1.5%;
+  box-shadow: inset 2px 2px 6px 0px rgba(0, 0, 128, 0.25);
+  font-size: 18px;
+}
+
+form select {
+  width: auto;
+  border: 0px;
+  border-radius: 8px;
+  height: 2rem;
+  padding-left: 1%;
+  padding-right: 1%;
   box-shadow: inset 2px 2px 6px 0px rgba(0, 0, 128, 0.25);
   font-size: 18px;
 }
@@ -141,6 +153,12 @@ footer {
   font-size: 16px;
 }
 
+.shadow {
+  border: 0px;
+  border-radius:8px;
+  box-shadow: 4px 4px 32px 0px rgba(0, 0, 128, 0.25);
+}
+
 .logo {
  height: 5rem;
  object-fit:cover;
@@ -152,6 +170,31 @@ footer {
   	background-color:white;
   	border-radius:8px;
   	box-shadow: 4px 4px 32px 0px rgba(0, 0, 128, 0.25);
+}
+
+.raplist {
+	width:48.75%;
+    padding:0% 5% 5% 5%;
+    margin-bottom:2.5%;
+  	background-color:white;
+  	border-radius:8px;
+  	box-shadow: 4px 4px 32px 0px rgba(0, 0, 128, 0.25);
+}
+
+.raplist:hover {
+  	box-shadow: 4px 4px 48px 0px rgba(32, 32, 128, 0.5);
+    transition: 0.3s;
+    background-color: #FCFEFF;
+}
+
+.raplist h2{
+  color: white;
+  padding: 3% 11% 3% 11%;
+  background-color: #023E8A;
+  border-radius: 8px 8px 0px 0px;
+  margin-left: -12.9%;
+  margin-right: -12.9%;
+  margin-bottom: 10%;
 }
 
 .row {
@@ -172,4 +215,20 @@ footer {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #3485E0;
+}
+
+.dateRapForm {
+  display: flex;
+}
+
+.dateRap {
+  width: 15%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.displayRap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
