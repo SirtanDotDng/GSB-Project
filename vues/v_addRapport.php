@@ -113,7 +113,7 @@
 
 
     <div>
-	    <input class="btn btn-success bouton" type="submit" name="bouton" value="Enregistrer">
+	    <input style="border-radius:8px;" class="btn btn-success bouton" type="submit" name="bouton" value="Enregistrer">
 	</div>
 </form>
 </div>

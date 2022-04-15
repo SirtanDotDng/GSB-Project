@@ -189,6 +189,23 @@ function getNumRapportAttente() {
   }
 }
 
+function setRapportValide($mat, $rap) {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="UPDATE rapport_visite SET RAP_NOUVEAU = '0' WHERE rapport_visite.COL_MATRICULE = ? AND rapport_visite.rap_num = ?";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($mat, $rap));
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
 function getLesRapports() {
   try
   {
@@ -293,6 +310,23 @@ function getLesRapportsDateD($date1, $date2) {
   	$query=$monPdo->prepare($req);
   	$query->execute(array($_SESSION['matricule'], $date1, $date2));
   }
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getLesRapportsNouveaux() {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT rapport_visite.COL_MATRICULE, rapport_visite.rap_num, rapport_visite.rap_date, rapport_visite.RAP_BILAN, rapport_visite.RAP_saisie_date, rapport_visite.RAP_ETAT, rapport_visite.PRA_NUM, rapport_visite.MED_DEPOTLEGAL, rapport_visite.MED_DEPOTLEGAL_2, rapport_visite.ID_motif, rapport_visite.motif_Autre, rapport_visite.PRA_NUM_PRATICIEN FROM rapport_visite INNER JOIN travailler ON travailler.COL_MATRICULE = rapport_visite.COL_MATRICULE WHERE travailler.REG_CODE = (SELECT REG_CODE FROM travailler WHERE COL_MATRICULE = ? GROUP BY COL_MATRICULE) AND RAP_NOUVEAU = 1 GROUP BY rap_num, rapport_visite.COL_MATRICULE ORDER BY rapport_visite.rap_date, rapport_visite.rap_num";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($_SESSION['matricule']));
   $res=$query->fetchAll();
   return $res;
   }

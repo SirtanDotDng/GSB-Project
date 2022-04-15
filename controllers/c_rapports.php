@@ -17,6 +17,9 @@ switch ($a) {
     case 'leRapportD' :
     	include('vues/v_leRapportD.php');
     	break;
+    case 'leRapportNouveau' :
+    	include('vues/v_leRapportNouveau.php');
+    	break;
     case 'addRapport' :
         include('vues/v_addRapport.php');
         break;
@@ -56,6 +59,9 @@ switch ($a) {
             }
     	include('vues/v_insertRapport.php');
     	break;
+  case 'valideRapport' :
+    include('vues/v_valideRapport.php');
+    break;
     default :
         include('vues/v_accueil.php');
         break;

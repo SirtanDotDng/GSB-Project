@@ -9,8 +9,7 @@ for($i=0;$i<14;$i++){
   $lesRapports[$i] = getLesRapportsCol($_GET['mat'])[$_GET['rap']-1][$i];
 }
 array_splice($lesRapports,1,1);
-  
-$codeMed = $lesRapports[6];
+
 $lesRapports[6] .= " (".getLeMed(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['MED_DEPOTLEGAL'])[0]['Nom commercial'].") ";
 
 if(isset($lesRapports[7])){
@@ -24,19 +23,16 @@ for($i=0;$i<(count($lesRapports)-2);$i++){
     $lesRapports[$i] = "NONE";
   }
   if($lesRapports[$i] == getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM']){
-    echo "<div class='row'>".$infoRap[$i]."<a href='http://gsb.mattatyalexis.fr/?c=menu&a=lePraticien&pra=".$lesRapports[$i]."'> ".$lesRapports[$i].", ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_NOM']." ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_PRENOM']."</a></div>";
+    echo "<div class='row'>".$infoRap[$i]." <a href='http://gsb.mattatyalexis.fr/?c=menu&a=lePraticien&pra=".$lesRapports[$i]."'>".$lesRapports[$i].", ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_NOM']." ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_PRENOM']."</a></div>";
   }else{
-    if($i == 6){
-      echo "<div class='row'>".$infoRap[6]."<a href='http://gsb.mattatyalexis.fr/?c=menu&a=leMedicament&med=".$codeMed."'>".$lesRapports[6]."</a></div>";
-    }else{
-      echo "<div class='row'>".$infoRap[$i]." ".$lesRapports[$i]."</div>";
-    }
+    echo "<div class='row'>".$infoRap[$i]." ".$lesRapports[$i]."</div>";
   }
 }
 ?>
-<form class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportSearchD" method="post">
-  <div>
-    <input class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
-  </div>
+<form style="margin-bottom: 0px; padding-bottom: 0px;" class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=valideRapport&mat=<?php echo $_GET['mat'] ?>&rap=<?php echo $_GET['rap'] ?>" method="post">
+  <input class="btn btn-success bouton" type="submit" name="bouton" value="Valider le rapport">
+</form>
+<form style="margin-top: 0px; margin-bottom: 0px;" class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportNouveaux" method="post">
+  <input class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
 </form>
 </div>
