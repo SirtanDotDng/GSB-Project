@@ -11,9 +11,9 @@ if(isset($_POST['idPra'])){
   }
 }
 ?>
-  <form action="http://gsb.mattatyalexis.fr/?c=menu&a=praticiens" method="post">
+  <form class="leX" action="http://gsb.mattatyalexis.fr/?c=menu&a=praticiens" method="post">
   <div>
-    <input class="btn btn-success bouton" type="submit" name="bouton" value="Retour">
+    <input class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
   </div>
 </form>
 </div>

@@ -18,7 +18,11 @@ switch ($a) {
         include('vues/v_monCompte.php');
         break;
   	default :
-    	include('vues/v_formConnexion.php');
+    	if(!isConnected()){
+          include('vues/v_formConnexion.php');
+        }else{
+          echo "<script>location.href='http://gsb.mattatyalexis.fr/?c=menu';</script>";
+        }
     	break;
 }
 

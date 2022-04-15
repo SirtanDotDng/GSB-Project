@@ -54,6 +54,23 @@ function getLeMed($idMed) {
   }
 }
 
+function getListeColReg() {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT collaborateur.COL_NOM, collaborateur.COL_PRENOM, collaborateur.COL_MATRICULE FROM `collaborateur` INNER JOIN travailler ON travailler.COL_MATRICULE = collaborateur.COL_MATRICULE WHERE travailler.REG_CODE = (SELECT REG_CODE FROM travailler WHERE COL_MATRICULE = ? GROUP BY COL_MATRICULE) GROUP BY collaborateur.COL_MATRICULE";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($_SESSION['matricule']));
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
 function getListePra() {
   try
   {
@@ -61,6 +78,23 @@ function getListePra() {
   $req="SELECT PRA_NUM as 'idPra', PRA_NOM as 'Nom', PRA_PRENOM as 'Prenom' FROM praticien ORDER BY PRA_NOM";
   $res = $monPdo->query($req);
   $lesLignes=$res->fetchAll();
+  return $lesLignes;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getListePraRap() {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT praticien.PRA_NOM, praticien.PRA_PRENOM, praticien.PRA_NUM FROM `praticien` INNER JOIN rapport_visite ON praticien.PRA_NUM = rapport_visite.PRA_NUM WHERE COL_MATRICULE = ? GROUP BY rapport_visite.PRA_NUM";
+  $query = $monPdo->prepare($req);
+  $query->execute(array($_SESSION['matricule']));
+  $lesLignes=$query->fetchAll();
   return $lesLignes;
   }
   catch (PDOException $e)
@@ -106,19 +140,19 @@ function getNumRapport() {
 
 function saisieRapport($colMat, $rapNum, $rapDate, $rapBilan, $rapSaisieDate, $rapEtat, $praNum, $medDepotLeg, $medDepotLeg2, $idMotif, $motifAutre, $remplacant) {
   try
-  {
-  $monPdo = connexionPDO();
-  $req="INSERT INTO rapport_visite (COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-  $query=$monPdo->prepare($req);
-  $query->execute(array($colMat, $rapNum, $rapDate, $rapBilan, $rapSaisieDate, $rapEtat, $praNum, ($medDepotLeg == "")? NULL : $medDepotLeg, ($medDepotLeg2 == "")? NULL : $medDepotLeg2, ($idMotif == "")? NULL : $idMotif, ($motifAutre == "")? NULL : $motifAutre, ($remplacant == "")? NULL : $remplacant));
-  $mes="Le rapport a bien été enregistré, vous pourrez le voir en retournant sur la page 'consulter mes rapports'";
-  }
+    {
+    $monPdo = connexionPDO();
+    $req="INSERT INTO rapport_visite (COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $query=$monPdo->prepare($req);
+    $query->execute(array($colMat, $rapNum, $rapDate, $rapBilan, $rapSaisieDate, $rapEtat, $praNum, ($medDepotLeg == "")? NULL : $medDepotLeg, ($medDepotLeg2 == "")? NULL : $medDepotLeg2, ($idMotif == "")? NULL : $idMotif, ($motifAutre == "")? NULL : $motifAutre, ($remplacant == "")? NULL : $remplacant));
+    $mes="Le rapport a bien été enregistré, vous pourrez le voir en retournant sur la page 'consulter mes rapports'";
+    }
   catch (PDOException $e)
-  {
-  $mes="Une erreur s'est produite pendant l'enregistrement du rapport, veuillez réessayer plus tard";
-  print "Erreur !: " . $e-getMessage();
-  die();
-  }
+    {
+    $mes="Une erreur s'est produite pendant l'enregistrement du rapport, veuillez réessayer plus tard";
+    print "Erreur !: " . $e-getMessage();
+    die();
+    }
   return($mes);
 }
 
@@ -138,6 +172,23 @@ function saisieEchantillon($medDepotLeg, $praNum, $rapNum, $qte) {
   }
 }
 
+function getNumRapportAttente() {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT (COUNT(rap_num)+1) FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_ETAT = 0";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($_SESSION['matricule']));
+  $res=$query->fetchAll();
+  return $res[0][0];
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
 function getLesRapports() {
   try
   {
@@ -145,6 +196,103 @@ function getLesRapports() {
   $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ?";
   $query=$monPdo->prepare($req);
   $query->execute(array($_SESSION['matricule']));
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getLesRapportsAttente() {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_ETAT = 0";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($_SESSION['matricule']));
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getLeRapportAttente($rap_num) {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_NUM = ? AND RAP_ETAT = 0";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($_SESSION['matricule'], $rap_num));
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getLesRapportsCol($col) {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ?";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($col));
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getLesRapportsDate($date1, $date2) {
+  try
+  {
+  $monPdo = connexionPDO();
+  if(isset($_POST['idPra']) && $_POST['idPra'] != 'aucun'){
+    $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_saisie_date >= ? AND RAP_saisie_date <= ? AND PRA_NUM = ? ORDER BY rap_date";
+  	$query=$monPdo->prepare($req);
+  	$query->execute(array($_SESSION['matricule'], $date1, $date2, $_POST['idPra']));
+  }else{
+  	$req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_saisie_date >= ? AND RAP_saisie_date <= ? ORDER BY rap_date";
+  	$query=$monPdo->prepare($req);
+  	$query->execute(array($_SESSION['matricule'], $date1, $date2));
+  }
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getLesRapportsDateD($date1, $date2) {
+  try
+  {
+  $monPdo = connexionPDO();
+  if(isset($_POST['idCol']) && $_POST['idCol'] != 'aucun'){
+    $req="SELECT rapport_visite.COL_MATRICULE, rapport_visite.rap_num, rapport_visite.rap_date, rapport_visite.RAP_BILAN, rapport_visite.RAP_saisie_date, rapport_visite.RAP_ETAT, rapport_visite.PRA_NUM, rapport_visite.MED_DEPOTLEGAL, rapport_visite.MED_DEPOTLEGAL_2, rapport_visite.ID_motif, rapport_visite.motif_Autre, rapport_visite.PRA_NUM_PRATICIEN FROM rapport_visite INNER JOIN travailler ON travailler.COL_MATRICULE = rapport_visite.COL_MATRICULE WHERE travailler.REG_CODE = (SELECT REG_CODE FROM travailler WHERE COL_MATRICULE = ? GROUP BY COL_MATRICULE) AND rapport_visite.RAP_saisie_date >= ? AND rapport_visite.RAP_saisie_date <= ? AND rapport_visite.COL_MATRICULE = ? GROUP BY rap_num, rapport_visite.COL_MATRICULE ORDER BY rapport_visite.rap_date";
+  	$query=$monPdo->prepare($req);
+  	$query->execute(array($_SESSION['matricule'], $date1, $date2, $_POST['idCol']));
+  }else{
+  	$req="SELECT rapport_visite.COL_MATRICULE, rapport_visite.rap_num, rapport_visite.rap_date, rapport_visite.RAP_BILAN, rapport_visite.RAP_saisie_date, rapport_visite.RAP_ETAT, rapport_visite.PRA_NUM, rapport_visite.MED_DEPOTLEGAL, rapport_visite.MED_DEPOTLEGAL_2, rapport_visite.ID_motif, rapport_visite.motif_Autre, rapport_visite.PRA_NUM_PRATICIEN FROM rapport_visite INNER JOIN travailler ON travailler.COL_MATRICULE = rapport_visite.COL_MATRICULE WHERE travailler.REG_CODE = (SELECT REG_CODE FROM travailler WHERE COL_MATRICULE = ? GROUP BY COL_MATRICULE) AND rapport_visite.RAP_saisie_date >= ? AND rapport_visite.RAP_saisie_date <= ? GROUP BY rap_num, rapport_visite.COL_MATRICULE ORDER BY rapport_visite.rap_date, rapport_visite.rap_num";
+  	$query=$monPdo->prepare($req);
+  	$query->execute(array($_SESSION['matricule'], $date1, $date2));
+  }
   $res=$query->fetchAll();
   return $res;
   }

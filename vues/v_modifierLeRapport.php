@@ -1,13 +1,18 @@
+<?php 
+$leRapport = getLeRapportAttente($_GET['rap']);
+var_dump($leRapport);
+?>
+
 <div class="list">
-<h1> Ajout Rapports </h1>
-<form class="saisieRapport" action="?c=rapports&a=insertRapport" method="post">
+<h1> Modifier le rapports n°<?php echo $_GET['rap'] ?></h1>
+<form class="saisieRapport" action="?c=rapports&a=updateRapport" method="post">
     <div>
         <label for="rapDate">Date Rapport :</label>
-        <input class="casesinput" type="date" name="rapDate" id="rapDate" required/>
+        <input value="<?php echo $leRapport['rap_date']; ?>" class="casesinput" type="date" name="rapDate" id="rapDate" required/>
     </div>
     <div>
         <label for="rapBilan">Bilan Rapport :</label>
-        <textarea class="casesinput" type="text" name="rapBilan" id="rapBilan" required/></textarea>
+        <textarea class="casesinput" type="text" name="rapBilan" id="rapBilan" required/><?php echo $leRapport['RAP_BILAN']; ?></textarea>
     </div>
     <div>
         <label for="praNum">Praticien :</label>

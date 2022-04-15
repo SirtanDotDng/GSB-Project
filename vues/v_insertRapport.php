@@ -1,3 +1,4 @@
 <?php
-echo "Normalement, c'est bon.";
+var_dump($_POST);
+var_dump($mes);
 ?>
