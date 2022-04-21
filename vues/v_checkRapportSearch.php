@@ -1,4 +1,4 @@
-<form class="shadow" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapport" method="post">
+<form style='background:#fff;' class="shadow" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapport" method="post">
   <h1 style="margin-bottom:2%"> Consultation des rapports </h1>
   <p class=dateRapForm>Rapport saisie entre le <input class=dateRap type="date" id="date1" name="date1"> et le <input class=dateRap type="date" id="date2" name="date2"></p>
   <div>
@@ -17,8 +17,9 @@
                <?php } ?>
            </select>
   </div>
+  <br>
   <div>
-	 <input class="btn btn-success bouton" type="submit" name="bouton" value="Selectionner">
+	 <input style="border-radius:0px" class="btn btn-success bouton" type="submit" name="bouton" value="Selectionner">
   </div>
 
   <script>

@@ -11,7 +11,7 @@
   </select>
   </div>
   <div>
-	 <input class="btn btn-success bouton" type="submit" name="bouton" value="Sélectionner" style="width: 25%;">
+	 <input style="width: 25%; border-radius:0px" class="btn btn-success bouton" type="submit" name="bouton" value="Sélectionner">
   </div>
 </form>
 </div>

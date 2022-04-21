@@ -30,9 +30,13 @@ for($i=0;$i<(count($lesRapports)-2);$i++){
 }
 ?>
 <form style="margin-bottom: 0px; padding-bottom: 0px;" class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=valideRapport&mat=<?php echo $_GET['mat'] ?>&rap=<?php echo $_GET['rap'] ?>" method="post">
-  <input class="btn btn-success bouton" type="submit" name="bouton" value="Valider le rapport">
+  <div style="text-align:center">
+  <input style="text-align:center; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-success bouton" type="submit" name="bouton" value="Valider le rapport">
+  </div>
 </form>
-<form style="margin-top: 0px; margin-bottom: 0px;" class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportNouveaux" method="post">
-  <input class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
+<form style="margin-top: -64px; margin-bottom: 0px;" class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportNouveaux" method="post">
+  <div style="text-align:center">
+<input style="text-align:center; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
+  </div>
 </form>
 </div>

@@ -161,7 +161,7 @@ function saisieEchantillon($medDepotLeg, $praNum, $rapNum, $qte) {
   try
   {
   $monPdo = connexionPDO();
-  $req="INSERT INTO offrir (MED_DEPOTLEGAL, PRA_NUM, rap_num, OFF_QTE) VALUES (?,?,?,?)";
+  $req="INSERT INTO offrir (MED_DEPOTLEGAL, COL_MAT, rap_num, OFF_QTE) VALUES (?,?,?,?)";
   $query=$monPdo->prepare($req);
   $query->execute(array($medDepotLeg, $praNum, $rapNum, $qte));
   }

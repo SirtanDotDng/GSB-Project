@@ -16,7 +16,7 @@ if(isset($_POST['date2']) && $_POST['date2'] != ""){
 
 
 for($j=0;$j<(count(getLesRapportsDate($date1, $date2)));$j++){
-	echo "<div id='element".getLesRapportsDate($date1, $date2)[$j][1]."' class='raplist'>";
+	echo "<div style='background:#fff;' id='element".getLesRapportsDate($date1, $date2)[$j][1]."' class='raplist'>";
   $lesRapports = array();
   echo "<h2> Rapport n°".getLesRapportsDate($date1, $date2)[$j][1]."</h2>";
   

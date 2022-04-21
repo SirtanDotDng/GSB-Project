@@ -7,7 +7,9 @@ if(isset($_GET['a'])){
 }
 
 switch ($a) {
-   
+    case 'test' :
+        include('vues/v_test.php');
+        break;
     case 'rapports' :
         include('vues/v_rapports.php');
         break;
@@ -44,24 +46,23 @@ switch ($a) {
     case 'checkRapportD' :
         include('vues/v_checkRapportDateD.php');
         break;
-        case 'insertRapport' :
-            if(isset($_POST['rapEtat'])){
-                saisieRapport($_SESSION['matricule'],getNumRapport(),$_POST['rapDate'] ,$_POST['rapBilan'],date("Y-m-d"), $_POST['rapEtat'],$_POST['praNum'] ,$_POST['medDepotLeg'],$_POST['medDepotLeg2'],$_POST['idMotif'],$_POST['motifAutre'],$_POST['remplacant']);
-                if(isset($_POST['echantillon']) && isset($_POST['qte'])){
-                saisieEchantillon($_POST['echantillon'],$_POST['praNum'],getNumRapport(),$_POST['qte']);
-                }
-            }else{
-                $rapEtat = 0;
-                SaisieRapport($_SESSION['matricule'],getNumRapport(),$_POST['rapDate'] ,$_POST['rapBilan'],date("Y-m-d"), $rapEtat ,$_POST['praNum'] ,$_POST['medDepotLeg'],$_POST['medDepotLeg2'],$_POST['idMotif'],$_POST['motifAutre'],$_POST['remplacant']);
-                if(isset($_POST['echantillon']) && isset($_POST['qte'])){
-                SaisieEchantillon($_POST['echantillon'],$_POST['praNum'],getNumRapport(),$_POST['qte']);
-                }
-            }
-    	include('vues/v_insertRapport.php');
+    case 'insertRapport' :
+        if(isset($_POST['rapEtat'])){
+            $rapEtat = 1;
+        }else{
+            $rapEtat = 0;
+        }
+        saisieRapport($_SESSION['matricule'],getNumRapport(),$_POST['rapDate'] ,$_POST['rapBilan'],date("Y-m-d"), $rapEtat, $_POST['praNum'] ,$_POST['medDepotLeg'],$_POST['medDepotLeg2'],$_POST['idMotif'],$_POST['motifAutre'],$_POST['remplacant']);
+        if(isset($_POST['echantillon1']) && isset($_POST['qte'])){
+            saisieEchantillon($_POST['echantillon1'],$_SESSION['matricule'],(getNumRapport()-1),$_POST['qte']);
+            echo $_POST['echantillon1'];
+            echo $_POST['echantillon2'];
+        }
+        include('vues/v_insertRapport.php');
     	break;
-  case 'valideRapport' :
-    include('vues/v_valideRapport.php');
-    break;
+    case 'valideRapport' :
+        include('vues/v_valideRapport.php');
+        break;
     default :
         include('vues/v_accueil.php');
         break;
