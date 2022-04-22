@@ -14,7 +14,7 @@ for($i=0;$i<8;$i++){
 
 <form action="http://gsb.mattatyalexis.fr/?c=compte&a=deconnexion" method="post">
   <div style="text-align:center">
-    <input style="width: 25%; border-radius:0px" class="btn btn-danger bouton" type="submit" name="bouton" value="Déconnexion">
+    <input style="font-size:14px; width: 25%; border-radius:0px" class="btn btn-danger bouton" type="submit" name="bouton" value="Déconnexion">
   </div>
 </form>
 </div>

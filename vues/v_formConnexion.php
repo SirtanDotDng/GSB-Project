@@ -6,7 +6,7 @@
             <img src='images/login0.jpg'>
             <div class="title">CONNEXION</div>
         </div>
-            <form method="post" action="http://gsb.mattatyalexis.fr/?c=compte&a=login">
+            <form style="margin:0%; padding-bottom:0%" method="post" action="http://gsb.mattatyalexis.fr/?c=compte&a=login">
                 <fieldset>
                     <legend>IDENTIFIANTS DE CONNEXION</legend>
                     <div>
@@ -21,8 +21,8 @@
                     <div>
                     <input class="casesinput" type="password" name="pass" id="pass" required/>
                     </div>
-                </fieldset><br>
-                    <input class="btn btn-primary bouton" type="submit" name="bouton" value=" CONNEXION "><br><br>        
+                </fieldset><br><br>
+                    <input style="border-radius:0px"class="btn btn-primary bouton" type="submit" name="bouton" value=" CONNEXION "><br><br>        
             </form>
         </div>
     </article>

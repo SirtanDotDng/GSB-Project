@@ -88,7 +88,7 @@
             </tr>
             <tr>
                 <td>
-                <input style="border-left: #388a02 solid 4px; background: #eefff0;" type="button" id="addRow" value="Ajouter un échantillon"/>
+                <input class="addechantillon" type="button" id="addRow" value="Ajouter un échantillon"/>
                 </td>
                 <td>
                     <input min="1" name="qte1" type="number">
@@ -102,31 +102,28 @@
             </tr>
     </table>
     </div>
-
     <div>
         <label for="rapEtat">Saisie définitive |</label>
         <input name="rapEtat" type="checkbox" value="1"/>
 	</div>
-
-<br>
-</section>
-    <div style="text-align:center">
-	    <input style="border-radius:0px; margin-top:-4%; width:50%; size:24px; font-weight:400" class="btn btn-success bouton" type="submit" name="bouton" value="Enregistrer">
+<div style="text-align:center">
+	    <input style="margin-top:1%; font-size:14px" class="addechantillon" type="submit" name="bouton" value="Enregistrer">
 	</div>
+</section>
 </form>
 </div>
 
 <script>
     
     var id=1;
-    var arrHead = new Array();
-    arrHead = ['', 'Quantité', 'Médicament'];
+    var arrHead = new Array(); arrHead = ['', 'Quantité', 'Médicament'];
     
     function addRow() {
 
-        id++;
-        
-        if(id<=10){
+        if(id<10){
+            
+            id++;
+
             var empTab = document.getElementById('empTable');
             var rowCnt = empTab.rows.length;
             var tr = empTab.insertRow(rowCnt);
@@ -142,7 +139,7 @@
                 
                     button.setAttribute('type', 'button');
                     button.setAttribute('value', 'Supprimer');
-                    button.setAttribute('style', 'background:#ffeeee; border-left: #8a0202 solid 4px');
+                    button.setAttribute('class', 'delechantillon');
                     button.setAttribute('onclick', 'removeRow(this)');
 
                     td.appendChild(button);
@@ -152,18 +149,25 @@
                     qte.setAttribute('type', 'number');
                     qte.setAttribute('min','1');
                     qte.setAttribute('name','qte'+id);
-                    var option = document.createElement("option")
-                    option.value = "value";
-                    option.text = "text";
-                    qte.appendChild(option);
                 
                     td.appendChild(qte);
                 }
                 if (c == 2) {
                     var med = document.createElement('select');
-                    med.setAttribute('value', "");
+                    med.setAttribute('value', '');
                     med.setAttribute('name','echantillon'+id);
-                    med.setAttribute('id','echantillon');
+                    
+                    var option = document.createElement("option")
+                    option.setAttribute('value', '');
+                    option.text = '';
+                    med.appendChild(option);
+
+                    <?php foreach(getListeMed() as $laLigne){ ?>
+                        var option = document.createElement("option");
+                        option.setAttribute('value',"<?php echo $laLigne['idMed'] ?>");
+                        option.text ="<?php echo $laLigne['Nom commercial']?>";
+                        med.appendChild(option);
+                    <?php } ?>
                     
                     td.appendChild(med);
                 }
@@ -174,7 +178,6 @@
     function removeRow(button) {
 
         id--;
-
         var empTab = document.getElementById('empTable');
         empTab.deleteRow(button.parentNode.parentNode.rowIndex);
     }

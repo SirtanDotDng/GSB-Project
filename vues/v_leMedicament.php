@@ -22,7 +22,7 @@ for($i=0;$i<(count($lesColonnes))/2-1;$i++){
 ?>
   <form class="leX" action="http://gsb.mattatyalexis.fr/?c=menu&a=medicaments" method="post">
     <div style="text-align:center">
-      <input style="width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
+      <input style="font-size:14px; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
     </div>
   </form>
 </div>

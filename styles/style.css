@@ -16,6 +16,11 @@ h1 {
   font-weight: 400;
 }
 
+a:hover, a:visited, a:link, a:active
+{
+    text-underline-offset: 3px;
+}
+
 .navMenu {
   height: 5rem;
   background-color: #023E8A;
@@ -40,11 +45,9 @@ h1 {
 
 .navMenu a:hover {
   color: #fff;
-  text-decoration: underline;
+  text-decoration: none;
   letter-spacing: 0.5px;
-  text-decoration-color: #fff;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-shadow: #fff 0 0 48px;
 }
 
 form {
@@ -54,11 +57,12 @@ form {
   margin-bottom: 2.5%;
 }
 
-form input {
+input {
   font-size: 18px;
   width: 100%;
   height: 32px;
   border-radius: 0px;
+  border: 0px;
   border-left: #023E8A solid 4px;
   background: #eeefff;
   box-shadow: none;
@@ -66,19 +70,23 @@ form input {
   padding-right: 8px;
   transition-duration: 0.3s;
   transition-delay: 0s;
-  border: 0px;
 }
 
-form input:focus {
+input:hover {
+  box-shadow: inset 0px -14px 10px -10px rgba(0, 0, 128, 0.1);
+}
+
+input:focus {
   box-shadow: inset 0px -12px 12px -8px rgba(0, 0, 128, 0.2);
   outline: 0px;
 }
 
-form textarea {
+textarea {
   font-size: 18px;
   width: 100%;
   height: 64px;
   border-radius: 0px;
+  border: 0px;
   border-left: #023E8A solid 4px;
   background: #eeefff;
   box-shadow: none;
@@ -87,10 +95,13 @@ form textarea {
   resize: none;
   transition-duration: 0.3s;
   transition-delay: 0s;
-  border: 0px;
 }
 
-form textarea:focus {
+textarea:hover {
+  box-shadow: inset 0px -14px 10px -10px rgba(0, 0, 128, 0.1);
+}
+
+textarea:focus {
   box-shadow: inset 0px -12px 12px -8px rgba(0, 0, 128, 0.2);
   outline: 0px;
 }
@@ -100,6 +111,7 @@ option {
   width: 100%;
   height: 32px;
   border-radius: 0px;
+  border: 0px;
   border-left: #023E8A solid 4px;
   background: #eeefff;
   box-shadow: none;
@@ -107,7 +119,10 @@ option {
   padding-right: 8px;
   transition-duration: 0.3s;
   transition-delay: 0s;
-  border: 0px;
+}
+
+option:hover {
+  box-shadow: inset 0px -14px 10px -10px rgba(0, 0, 128, 0.1);
 }
 
 option:focus {
@@ -115,11 +130,12 @@ option:focus {
   outline: 0px;
 }
 
-form select {
+select {
   font-size: 18px;
   width: 100%;
   height: 32px;
   border-radius: 0px;
+  border: 0px;
   border-left: #023E8A solid 4px;
   background: #eeefff;
   box-shadow: none;
@@ -127,10 +143,13 @@ form select {
   padding-right: 8px;
   transition-duration: 0.3s;
   transition-delay: 0s;
-  border:0px;
 }
 
-form select:focus {
+select:hover {
+  box-shadow: inset 0px -14px 10px -10px rgba(0, 0, 128, 0.1);
+}
+
+select:focus {
   box-shadow: inset 0px -12px 12px -8px rgba(0, 0, 128, 0.2);
   outline: 0px;
 }
@@ -147,10 +166,7 @@ form select:focus {
   background-color: #eeefff;
   font-family: 'Josefin Sans', sans-serif;
   font-size:20px;
-  padding-top:2%;
-  padding-right:2%;
-  padding-left:2%;
-  padding-bottom:2%;
+  padding:2%;
   min-height: calc(100vh - 10rem);
 }
 
@@ -209,8 +225,8 @@ footer {
 }
 
 .list {
-    min-height:calc(100% - 15rem);
-	width:100%;
+    min-height:calc(100% - 16rem);
+	  width:100%;
     padding:5%;
   	background-color:#fff;
   	border-radius:8px;
@@ -300,12 +316,13 @@ footer {
   height: 308px;
   width: 308px;
   border: solid 4px #023E8A;
-  border-radius: 48px;
+  border-radius: 24px;
   text-align: center;
   align-items: center;
   padding: 1% 1% 0 1%;
   margin: 4%;
-  background-color: white;
+  background-color: #fff;
+  transition-duration: 0.3s;
 }
 
 .rapmenudiv {
@@ -320,14 +337,30 @@ footer {
   background-color: #023E8A;
   color: white;
   padding: 5% 3% 5% 3%;
-  border-radius: 0 0 48px 48px;
+  border-radius: 0 0 24px 24px;
   text-decoration: none;
   width: 308px;
   margin-bottom: -12px;
+  transition-duration: 0.3s;
 }
 
 .rapmenu:hover{
   border-color: #1E62B4;
+  background-color: #eeefff;
+  cursor:pointer;
+}
+
+.rapmenu img {
+  filter: brightness(1.0);
+  transition-duration: 0.3s;
+}
+
+.rapmenu:hover img{
+  filter: brightness(1.3);
+}
+
+.rapmenu:hover a{
+  background-color: #1E62B4;
 }
 
 .rapmenu a:hover{
@@ -346,95 +379,23 @@ footer {
   margin-bottom: 0%;
 }
 
-.newrap input {
-  width: 100%;
-  height: 32px;
-  border-radius: 0px;
-  border-left: #023E8A solid 4px;
-  background: #eeefff;
-  box-shadow: none;
-  padding-left: 8px;
-  padding-right: 8px;
-  transition-duration: 0.3s;
-  transition-delay: 0s;
-}
-
-.newrap input:focus {
-  box-shadow: inset 0px -12px 12px -8px rgba(0, 0, 128, 0.2);
-  outline: 0px;
-}
-
-.newrap textarea {
-  width: 100%;
-  height: 64px;
-  border-radius: 0px;
-  border-left: #023E8A solid 4px;
-  background: #eeefff;
-  box-shadow: none;
-  padding-left: 8px;
-  padding-right: 8px;
-  resize: none;
-  transition-duration: 0.3s;
-  transition-delay: 0s;
-}
-
-.newrap textarea:focus {
-  box-shadow: inset 0px -12px 12px -8px rgba(0, 0, 128, 0.2);
-  outline: 0px;
-}
-
-.newrap option {
-  width: 100%;
-  height: 32px;
-  border-radius: 0px;
-  border-left: #023E8A solid 4px;
-  background: #eeefff;
-  box-shadow: none;
-  padding-left: 8px;
-  padding-right: 8px;
-  transition-duration: 0.3s;
-  transition-delay: 0s;
-}
-
-.newrap option:focus {
-  box-shadow: inset 0px -12px 12px -8px rgba(0, 0, 128, 0.2);
-  outline: 0px;
-}
-
-.newrap select {
-  width: 100%;
-  height: 32px;
-  border-radius: 0px;
-  border-left: #023E8A solid 4px;
-  background: #eeefff;
-  box-shadow: none;
-  padding-left: 8px;
-  padding-right: 8px;
-  transition-duration: 0.3s;
-  transition-delay: 0s;
-}
-
-.newrap select:focus {
-  box-shadow: inset 0px -12px 12px -8px rgba(0, 0, 128, 0.2);
-  outline: 0px;
-}
-
 .saisieRapport {
   margin-top: -4%;
+  margin-bottom: 0%;
 }
 
 input[type="checkbox"]{
   appearance:none;
-  width:48px;
-  height:24px;
-  border:0px solid #aaa;
-  border-radius:16px;
+  width:40px;
+  height:20px;
+  border:0px solid #eeefff;
+  border-radius:4px;
   background:#eeefff;
   position:relative;
   display:inline-block;
   overflow:hidden;
   vertical-align:middle;
-  transition: background 0.4s;
+  transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   box-sizing:border-box;
   box-shadow: none;
 }
@@ -443,13 +404,17 @@ input[type="checkbox"]:after{
   top:2px;
   left: 2px;
   position:absolute;
-  width:20px;
-  height:20px;
+  width:16px;
+  height:16px;
   background:#023E8A;
-  border:0px solid #aaa;
-  border-radius:16px;
-  transition: left 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  border:0px solid #eeefff;
+  border-radius:2px;
+  transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   box-shadow: none;
+}
+
+input[type="checkbox"]:hover:after{
+  background:#538bd4;
 }
 
 input[type="checkbox"]:focus{
@@ -462,9 +427,13 @@ input[type="checkbox"]:checked{
 }
 input[type="checkbox"]:checked:after{
   top:2px;
-  left:26px;
+  left:22px;
   border-color:#8daee5;
   background:#eeefff;
+}
+
+input[type="checkbox"]:checked:hover{
+  background:#538bd4;
 }
 
 input[type="checkbox"]:hover:not(:checked):not(:disabled):after,
@@ -474,9 +443,43 @@ input[type="checkbox"]:focus:not(:checked):not(:disabled):after{
 
 input[type="checkbox"]:hover:checked:not(:disabled):after,
 input[type="checkbox"]:focus:checked:not(:disabled):after{
-  left:26px;
+  left:22px;
 }
 
 input[type="checkbox"]:disabled{
   opacity:0.5;
+}
+
+.addechantillon {
+  border-left: #28a745 solid 4px; 
+  background: #00ff0030;
+  font-size: 14px;
+}
+
+.addechantillon:hover {
+  box-shadow: none;
+  background-color: #aaffaa;
+}
+
+.addechantillon:focus {
+  box-shadow: none;
+}
+
+.delechantillon {
+  border-left: #dc3546 solid 4px; 
+  background: #ff000030;
+  font-size: 14px;
+}
+
+.delechantillon:hover {
+  box-shadow: none;
+  background-color: #ffaaaa;
+}
+
+.delechantillon:focus {
+  box-shadow: none;
+}
+
+.btn:hover {
+  box-shadow: none;
 }

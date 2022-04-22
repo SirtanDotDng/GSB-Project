@@ -1,8 +1,9 @@
 <head>
     <meta charset="UTF-8" />
-    <title>GSB</title>
+    <title>GSB | Compte Rendu</title>
     <?php include('includes/fonctions.php'); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"/>
