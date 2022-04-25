@@ -172,6 +172,40 @@ function saisieEchantillon($medDepotLeg, $praNum, $rapNum, $qte) {
   }
 }
 
+function getNbEchantillon($rapport) {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT COUNT(*) FROM offrir WHERE rap_num = ? AND COL_MAT = ?";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($rapport, $_SESSION['matricule']));
+  $res=$query->fetch();
+  return $res[0][0];
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
+function getEchantillon($rapport) {
+  try
+  {
+  $monPdo = connexionPDO();
+  $req="SELECT MED_DEPOTLEGAL, OFF_QTE FROM offrir WHERE COL_MAT = ? AND rap_num = ?";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($_SESSION['matricule'], $rapport));
+  $res=$query->fetchAll();
+  return $res;
+  }
+  catch (PDOException $e)
+  {
+  print "Erreur !: " . $e-getMessage();
+  die();
+  }
+}
+
 function getNumRapportAttente() {
   try
   {

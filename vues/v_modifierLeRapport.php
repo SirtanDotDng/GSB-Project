@@ -15,20 +15,20 @@ $autreMotif =   $leRapport[0][10];
 $remplacant =   $leRapport[0][11];
 ?>
 
-<div class="list">
+<div class="list" id="poi">
 <section class="newrap">
 <h1> Modifier le rapports n°<?php echo $rapport ?></h1>
 <form class="saisieRapport" action="?c=rapports&a=updateRapport" method="post">
     <div>
-        <label for="rapDate">Date Rapport :</label>
+        <label for="rapDate">Date Rapport</label>
         <input value="<?php echo $date; ?>" class="casesinput" type="date" name="rapDate" id="rapDate" required/>
     </div>
     <div>
-        <label for="rapBilan">Bilan Rapport :</label>
+        <label for="rapBilan">Bilan Rapport</label>
         <textarea class="casesinput" type="text" name="rapBilan" id="rapBilan" required/><?php echo $bilan; ?></textarea>
     </div>
     <div>
-        <label for="praNum">Praticien :</label>
+        <label for="praNum">Praticien</label>
         <select name="praNum" id="praNum" required/>
             <?php foreach(getListePra() as $laLigne){ ?>
             	<option value="<?php echo $laLigne['idPra'];?>"<?php if($laLigne['idPra'] == $praticien)echo "selected";?>><?php echo $laLigne['Nom']; echo " "; echo $laLigne['Prenom'] ?></option>
@@ -36,7 +36,7 @@ $remplacant =   $leRapport[0][11];
         </select>
     </div>
     <div>
-        <label for="medDepotLeg">Nom Médicament :</label>
+        <label for="medDepotLeg">Nom Médicament</label>
         <select name="medDepotLeg" id="medDepotLeg" />
       		<option selected="selected" value=""></option>
             <?php foreach(getListeMed() as $laLigne){ ?>
@@ -45,7 +45,7 @@ $remplacant =   $leRapport[0][11];
         </select>
     </div>
     <div>
-    <label for="medDepotLeg2">Nom Médicament :</label>
+    <label for="medDepotLeg2">Nom Médicament</label>
         <select name="medDepotLeg2" id="medDepotLeg2"/>
       		<option selected="selected" value=""></option>
             <?php foreach(getListeMed() as $laLigne){ ?>
@@ -54,7 +54,7 @@ $remplacant =   $leRapport[0][11];
         </select>
     </div>
 	<div>
-        <label for="idMotif">Motif :</label>
+        <label for="idMotif">Motif</label>
         <select name="idMotif" id="idMotif" />
                 <option value="0" <?php if(0 == $motif)echo "selected";?>>Autre</option>
       			<option value="1" <?php if(1 == $motif)echo "selected";?>>Périodique</option>
@@ -63,7 +63,7 @@ $remplacant =   $leRapport[0][11];
 	</div>
 
 	<div id="motifTitle">
-        <label for="motifAutre">Motif Autre :</label>
+        <label for="motifAutre">Motif Autre</label>
         <input value="<?php echo $autreMotif; ?>"class="casesinput" type="text" name="motifAutre" id="motifAutre" />
     </div>
 
@@ -87,7 +87,7 @@ $remplacant =   $leRapport[0][11];
     </script>
 
     <div>
-        <label for="remplacant">Remplacant Praticien :</label>
+        <label for="remplacant">Remplacant Praticien</label>
         <select name="remplacant" id="remplacant"/>
       	<option selected="selected" value=""></option>
             <?php foreach(getListePra() as $laLigne){ ?>
@@ -100,12 +100,42 @@ $remplacant =   $leRapport[0][11];
 
 	<div id="cont">
     <table style="width:100%" id="empTable">
+    <?php 
+            if(!empty(getEchantillon($_GET['rap']))){
+                $id = 1;?>
+                
             <tr>
                 <th></th>
                 <th>Quantité</th>
                 <th>Médicament</th>
             </tr>
-            <tr>
+            <?php foreach(getEchantillon($_GET['rap']) as $laLigne){?>
+            <tr id='row<?php echo $id?>'>
+                <td>
+                    <?php if($id==1){
+                echo'<input class="addechantillon" type="button" id="addRow" value="Ajouter un échantillon"/>';
+            }else{
+                echo'<input class="delechantillon" type="button" id="removeRow" value="Supprimer"/>';}?>
+                </td>
+                <td>
+                    <input min="1" name="qte<?php echo $id?>" type="number" value="<?php echo $laLigne['OFF_QTE'];?>">
+                </td>
+                <td>
+                    <select name="echantillon<?php echo $id?>" id="echantillon"/>
+                    <?php foreach(getListeMed() as $leMed){ ?>
+                        <option value="<?php echo $leMed['idMed'];?>"<?php if($leMed['idMed'] == $laLigne['MED_DEPOTLEGAL'])echo "selected";?>><?php echo $leMed['Nom commercial']; ?></option><?php }?>
+                    </select>
+                </td>
+            </tr>
+            <?php $id++;}}else{?>
+                
+                <tr>
+                <th></th>
+                <th>Quantité</th>
+                <th>Médicament</th>
+                </tr>
+
+                <tr>
                 <td>
                 <input class="addechantillon" type="button" id="addRow" value="Ajouter un échantillon"/>
                 </td>
@@ -119,6 +149,10 @@ $remplacant =   $leRapport[0][11];
                     </select>
                 </td>
             </tr>
+
+
+
+            <?php } ?>
     </table>
     </div>
     
@@ -134,21 +168,19 @@ $remplacant =   $leRapport[0][11];
 </div>
 
 <script>
-    
-    var id=1;
-    var arrHead = new Array(); arrHead = ['', 'Quantité', 'Médicament'];
-    
-    function addRow() {
 
-        if(id<10){
-            
-            id++;
+    var arrHead = new Array(); arrHead = ['', 'Quantité', 'Médicament'];
+    var arrayTD = ['button1'];
+    
+    function addRow(id){
+
+        if(id<11){
 
             var empTab = document.getElementById('empTable');
             var rowCnt = empTab.rows.length;
             var tr = empTab.insertRow(rowCnt);
             
-            tr = empTab.insertRow(rowCnt);
+            tr.setAttribute('id','row'+id);
 
             for (var c = 0; c < arrHead.length; c++) {
                 var td = document.createElement('td');
@@ -161,7 +193,7 @@ $remplacant =   $leRapport[0][11];
                     button.setAttribute('value', 'Supprimer');
                     button.setAttribute('class', 'delechantillon');
                     button.setAttribute('onclick', 'removeRow(this)');
-
+                    button.setAttribute('id','button'+id);
                     td.appendChild(button);
                 }
                 if (c == 1) {
@@ -169,6 +201,7 @@ $remplacant =   $leRapport[0][11];
                     qte.setAttribute('type', 'number');
                     qte.setAttribute('min','1');
                     qte.setAttribute('name','qte'+id);
+                    qte.setAttribute('id','qte'+id);
                 
                     td.appendChild(qte);
                 }
@@ -176,6 +209,7 @@ $remplacant =   $leRapport[0][11];
                     var med = document.createElement('select');
                     med.setAttribute('value', '');
                     med.setAttribute('name','echantillon'+id);
+                    med.setAttribute('id','med'+id);
                     
                     var option = document.createElement("option")
                     option.setAttribute('value', '');
@@ -195,13 +229,52 @@ $remplacant =   $leRapport[0][11];
         }
     }
 
-    function removeRow(button) {
 
-        id--;
+    function nbEchantillon(){
+        for( var i = 0; i < <?php echo getNbEchantillon($_GET['rap'])?>; i++){
+            arrayTD.push('button'+i);
+        }
+    }
+
+    
+    function idCheck(){
+        
+        var index = 1;
+        var added = false;
+        
+        while(!added && index < 11){
+            
+            var indexQte = 'button'+index;
+            
+            if(!contains(indexQte, arrayTD)){
+                arrayTD.push(indexQte)
+                addRow(index);
+                added = true;
+            }
+            
+            index++;
+        
+        }
+    }
+
+    function contains(indexQte, arrayTD){
+        return (arrayTD.includes(indexQte));
+    }
+
+
+    function removeRow(button){
+
         var empTab = document.getElementById('empTable');
+        for( var i = 0; i < arrayTD.length; i++){ 
+            if ( arrayTD[i] == button.id ){ 
+                arrayTD.splice(i, 1); 
+            }
+        }
         empTab.deleteRow(button.parentNode.parentNode.rowIndex);
     }
 
-    document.getElementById("addRow").addEventListener("click", addRow);
+    document.getElementById("addRow").addEventListener("click", idCheck);
+    document.getElementById("removeRow").addEventListener("click", removeRow(this));
+    document.getElementById("poi").addEventListener("load", nbEchantillon);
 
 </script>

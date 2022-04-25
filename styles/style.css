@@ -58,6 +58,7 @@ form {
 }
 
 input {
+  padding-top: 3px;
   font-size: 18px;
   width: 100%;
   height: 32px;
@@ -82,6 +83,7 @@ input:focus {
 }
 
 textarea {
+  padding-top: 3px;
   font-size: 18px;
   width: 100%;
   height: 64px;
@@ -107,6 +109,7 @@ textarea:focus {
 }
 
 option {
+  padding-top: 3px;
   font-size: 18px;
   width: 100%;
   height: 32px;
@@ -131,6 +134,7 @@ option:focus {
 }
 
 select {
+  padding-top: 3px;
   font-size: 18px;
   width: 100%;
   height: 32px;
@@ -389,7 +393,6 @@ input[type="checkbox"]{
   width:40px;
   height:20px;
   border:0px solid #eeefff;
-  border-radius:4px;
   background:#eeefff;
   position:relative;
   display:inline-block;
@@ -408,7 +411,6 @@ input[type="checkbox"]:after{
   height:16px;
   background:#023E8A;
   border:0px solid #eeefff;
-  border-radius:2px;
   transition: 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   box-shadow: none;
 }

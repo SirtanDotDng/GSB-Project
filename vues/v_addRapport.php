@@ -1,4 +1,4 @@
-<div class="list" onload="option()">
+<div class="list">
     <section class="newrap">
 <h1> Ajout Rapports </h1>
 <form class="saisieRapport" action="?c=rapports&a=insertRapport" method="post">
@@ -80,13 +80,13 @@
     </div><br>
     
     <div id="cont">
-    <table style="width:100%" id="empTable">
+        <table style="width:100%" id="empTable">
             <tr>
                 <th></th>
                 <th>Quantité</th>
                 <th>Médicament</th>
             </tr>
-            <tr>
+            <tr id='row1'>
                 <td>
                 <input class="addechantillon" type="button" id="addRow" value="Ajouter un échantillon"/>
                 </td>
@@ -100,16 +100,19 @@
                     </select>
                 </td>
             </tr>
-    </table>
+        </table>
     </div>
+
     <div>
         <label for="rapEtat">Saisie définitive |</label>
         <input name="rapEtat" type="checkbox" value="1"/>
 	</div>
-<div style="text-align:center">
+    
+    <div style="text-align:center">
 	    <input style="margin-top:1%; font-size:14px" class="addechantillon" type="submit" name="bouton" value="Enregistrer">
 	</div>
 </section>
+
 </form>
 </div>
 
@@ -117,18 +120,17 @@
     
     var id=1;
     var arrHead = new Array(); arrHead = ['', 'Quantité', 'Médicament'];
+    var arrayTD = ['button1'];
     
-    function addRow() {
+    function addRow(id){
 
-        if(id<10){
-            
-            id++;
+        if(id<11){
 
             var empTab = document.getElementById('empTable');
             var rowCnt = empTab.rows.length;
             var tr = empTab.insertRow(rowCnt);
             
-            tr = empTab.insertRow(rowCnt);
+            tr.setAttribute('id','row'+id);
 
             for (var c = 0; c < arrHead.length; c++) {
                 var td = document.createElement('td');
@@ -141,7 +143,7 @@
                     button.setAttribute('value', 'Supprimer');
                     button.setAttribute('class', 'delechantillon');
                     button.setAttribute('onclick', 'removeRow(this)');
-
+                    button.setAttribute('id','button'+id);
                     td.appendChild(button);
                 }
                 if (c == 1) {
@@ -149,6 +151,7 @@
                     qte.setAttribute('type', 'number');
                     qte.setAttribute('min','1');
                     qte.setAttribute('name','qte'+id);
+                    qte.setAttribute('id','qte'+id);
                 
                     td.appendChild(qte);
                 }
@@ -156,6 +159,7 @@
                     var med = document.createElement('select');
                     med.setAttribute('value', '');
                     med.setAttribute('name','echantillon'+id);
+                    med.setAttribute('id','med'+id);
                     
                     var option = document.createElement("option")
                     option.setAttribute('value', '');
@@ -175,13 +179,44 @@
         }
     }
 
-    function removeRow(button) {
+    
+    function idCheck(){
+        
+        var index = 1;
+        var added = false;
+        
+        while(!added && index < 11){
+            
+            var indexQte = 'button'+index;
+            
+            if(!contains(indexQte, arrayTD)){
+                arrayTD.push(indexQte)
+                addRow(index);
+                added = true;
+            }
+            
+            index++;
+        
+        }
+    }
+
+    function contains(indexQte, arrayTD){
+        return (arrayTD.includes(indexQte));
+    }
+
+
+    function removeRow(button){
 
         id--;
         var empTab = document.getElementById('empTable');
+        for( var i = 0; i < arrayTD.length; i++){ 
+            if ( arrayTD[i] == button.id ){ 
+                arrayTD.splice(i, 1); 
+            }
+        }
         empTab.deleteRow(button.parentNode.parentNode.rowIndex);
     }
 
-    document.getElementById("addRow").addEventListener("click", addRow);
+    document.getElementById("addRow").addEventListener("click", idCheck);
 
 </script>

@@ -19,13 +19,13 @@ if(isset($lesRapports[7])){
 }
 array_splice($lesRapports,7,1);
 for($i=0;$i<(count($lesRapports)-2);$i++){
-  if(is_null($lesRapports[$i])){
-    $lesRapports[$i] = "NONE";
-  }
-  if($lesRapports[$i] == getLesRapports()[$_GET['rap']-1]['PRA_NUM']){
-    echo "<div class='row'>".$infoRap[$i]." ".$lesRapports[$i].", ".getLePra(getLesRapports()[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_NOM']." ".getLePra(getLesRapports()[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_PRENOM']."</div>";
-  }else{
-    echo "<div class='row'>".$infoRap[$i]." ".$lesRapports[$i]."</div>";
+  if(!is_null($lesRapports[$i])){
+    if($lesRapports[$i] == getLesRapports()[$_GET['rap']-1]['PRA_NUM']){
+      echo "<div class='row'>".$infoRap[$i]." ".$lesRapports[$i].", ".getLePra(getLesRapports()[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_NOM']." ".getLePra(getLesRapports()[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_PRENOM']."</div>";
+    }else{
+      echo "<div class='row'>".$infoRap[$i]." ".$lesRapports[$i]."</div>";
+    }
+
   }
 }
 ?>
