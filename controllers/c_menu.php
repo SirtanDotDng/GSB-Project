@@ -5,7 +5,6 @@ if(isset($_GET['a'])){
 }else{
     $a="";
 }
-
 switch ($a) {
     
     case 'praticiens' :

@@ -2,23 +2,56 @@
 
 require('bd/bd.php');
 
-function login($mail, $pass) {
-    
+function register($username, $password, $mail, $matricule, $type) {
+  
+  $hash = md5($mail).md5($password);
+
+  $monPdo = connexionPDO();
+  $req="INSERT INTO compte (username, password, Mail, COL_MATRICULE, ID_Type) VALUES (?,?,?,?,?)";  
+  $query = $monPdo->prepare($req);
+  $query->execute(array($username, $hash, $mail, $matricule, $type));
+      echo "<script>location.href='http://gsb.mattatyalexis.fr/?c=menu';</script>";
+}
+
+function changePassword($mail, $newpassword) {
+  
+  $hash = md5($mail).md5($newpassword);
+
+  $monPdo = connexionPDO();
+  $req="UPDATE compte SET password = ? WHERE Mail = ?";  
+  $query = $monPdo->prepare($req);
+  $query->execute(array($hash, $mail));
+}
+
+function login($mail, $password) {
+
     $monPdo = connexionPDO();
-    $req="SELECT IdCompte, Mail, password, ID_Type, COL_MATRICULE FROM compte WHERE Mail = ? AND password = ?";  
+    $req="SELECT IdCompte, Mail, ID_Type, COL_MATRICULE FROM compte WHERE Mail = ? AND password = ?";  
     $query = $monPdo->prepare($req);
-    $query->execute(array($mail, $pass));
+    $query->execute(array($mail, md5($mail).md5($password)));
     $res=$query->fetchAll();
     if($res){
-      	$_SESSION['id'] = $res[0][0];
-        $_SESSION['mail'] = $mail;
-      	$_SESSION['grade'] = $res[0][3];
-      	$_SESSION['matricule'] = $res[0][4];
-        echo "<script>location.href='http://gsb.mattatyalexis.fr/?c=menu';</script>";
-    }else{
-       echo "<script>location.href='http://gsb.mattatyalexis.fr/?c=compte&a=formConnexion&x=erreur';</script>";
-        deconnexion();
+      $_SESSION['id'] = $res[0][0];
+      $_SESSION['mail'] = $mail;
+      $_SESSION['grade'] = $res[0][2];
+      $_SESSION['matricule'] = $res[0][3];
+      echo "<script>location.href='http://gsb.mattatyalexis.fr/?c=menu';</script>";
     }
+    else{
+      echo "<script>location.href='http://gsb.mattatyalexis.fr/?c=compte&a=formConnexion&x=erreur';</script>";
+      deconnexion();
+    }
+}
+
+function getPassword($mail) {
+
+  $monPdo = connexionPDO();
+  $req="SELECT password FROM compte WHERE Mail = ?";  
+  $query = $monPdo->prepare($req);
+  $query->execute(array($mail));
+  $res=$query->fetchAll();
+  return $res;
+
 }
 
 function getListeMed() {
@@ -261,7 +294,7 @@ function getLesRapportsAttente() {
   try
   {
   $monPdo = connexionPDO();
-  $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_ETAT = 0";
+  $req="SELECT COL_MATRICULE, rap_num, rap_date, RAP_BILAN, RAP_saisie_date, RAP_ETAT, PRA_NUM, MED_DEPOTLEGAL, MED_DEPOTLEGAL_2, ID_motif, motif_Autre, PRA_NUM_PRATICIEN FROM rapport_visite WHERE COL_MATRICULE = ? AND RAP_NOUVEAU = 1 ORDER BY rap_date";
   $query=$monPdo->prepare($req);
   $query->execute(array($_SESSION['matricule']));
   $res=$query->fetchAll();

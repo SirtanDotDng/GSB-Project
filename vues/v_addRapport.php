@@ -161,7 +161,7 @@
                     med.setAttribute('name','echantillon'+id);
                     med.setAttribute('id','med'+id);
                     
-                    var option = document.createElement("option")
+                    var option = document.createElement("option");
                     option.setAttribute('value', '');
                     option.text = '';
                     med.appendChild(option);
@@ -207,7 +207,6 @@
 
     function removeRow(button){
 
-        id--;
         var empTab = document.getElementById('empTable');
         for( var i = 0; i < arrayTD.length; i++){ 
             if ( arrayTD[i] == button.id ){ 
