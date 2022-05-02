@@ -29,7 +29,7 @@ for($i=0;$i<(count($lesRapports)-2);$i++){
   }
 }
 ?>
-<form class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportSearch" method="post">
+<form class="leX" action="https://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportSearch" method="post">
   <div style="text-align:center">
     <input style="font-size:14px; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
   </div>

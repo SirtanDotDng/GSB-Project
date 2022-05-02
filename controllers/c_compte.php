@@ -21,7 +21,7 @@ switch ($a) {
     	if(!isConnected()){
           include('vues/v_formConnexion.php');
         }else{
-          echo "<script>location.href='http://gsb.mattatyalexis.fr/?c=menu';</script>";
+          echo "<script>location.href='https://gsb.mattatyalexis.fr/?c=menu';</script>";
         }
     	break;
 }

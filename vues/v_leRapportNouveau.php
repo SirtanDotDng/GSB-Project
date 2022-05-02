@@ -21,19 +21,19 @@ array_splice($lesRapports,7,1);
 for($i=0;$i<(count($lesRapports)-2);$i++){
   if(!is_null($lesRapports[$i])){
     if($lesRapports[$i] == getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM']){
-      echo "<div class='row'>".$infoRap[$i]." <a href='http://gsb.mattatyalexis.fr/?c=menu&a=lePraticien&pra=".$lesRapports[$i]."'>".$lesRapports[$i].", ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_NOM']." ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_PRENOM']."</a></div>";
+      echo "<div class='row'>".$infoRap[$i]." <a href='https://gsb.mattatyalexis.fr/?c=menu&a=lePraticien&pra=".$lesRapports[$i]."'>".$lesRapports[$i].", ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_NOM']." ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_PRENOM']."</a></div>";
     }else{
       echo "<div class='row'>".$infoRap[$i]." ".$lesRapports[$i]."</div>";
     }
   }
 }
 ?>
-<form style="margin-bottom: 0px; padding-bottom: 0px;" class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=valideRapport&mat=<?php echo $_GET['mat'] ?>&rap=<?php echo $_GET['rap'] ?>" method="post">
+<form style="margin-bottom: 0px; padding-bottom: 0px;" class="leX" action="https://gsb.mattatyalexis.fr/?c=rapports&a=valideRapport&mat=<?php echo $_GET['mat'] ?>&rap=<?php echo $_GET['rap'] ?>" method="post">
   <div style="text-align:center">
   <input style="font-size:14px; text-align:center; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-success bouton" type="submit" name="bouton" value="Valider le rapport">
   </div>
 </form>
-<form style="margin-top: -64px; margin-bottom: 0px;" class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportNouveaux" method="post">
+<form style="margin-top: -64px; margin-bottom: 0px;" class="leX" action="https://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportNouveaux" method="post">
   <div style="text-align:center">
 <input style="font-size:14px; text-align:center; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
   </div>

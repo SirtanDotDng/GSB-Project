@@ -7,7 +7,7 @@ setRapportValide($_GET['mat'], $_GET['rap']);
 ?>
 <script>
 setTimeout(function(){
-    window.location.href = 'http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportNouveaux';
+    window.location.href = 'https://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportNouveaux';
 }, 4000);
 </script>
 </div>

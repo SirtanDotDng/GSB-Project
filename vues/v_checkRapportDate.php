@@ -32,7 +32,7 @@ for($j=0;$j<(count(getLesRapportsDate($date1, $date2)));$j++){
   ?>
   <script type="text/javascript">
     document.getElementById("element<?php echo getLesRapportsDate($date1, $date2)[$j][1];?>").onclick = function () {
-        location.href = "http://gsb.mattatyalexis.fr/?c=rapports&a=leRapport&rap=<?php echo getLesRapportsDate($date1, $date2)[$j][1];?>";
+        location.href = "https://gsb.mattatyalexis.fr/?c=rapports&a=leRapport&rap=<?php echo getLesRapportsDate($date1, $date2)[$j][1];?>";
     };
   </script>
   <?php

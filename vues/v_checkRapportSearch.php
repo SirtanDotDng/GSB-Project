@@ -1,4 +1,4 @@
-<form style='background:#fff;' class="shadow" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapport" method="post">
+<form style='background:#fff;' class="shadow" action="https://gsb.mattatyalexis.fr/?c=rapports&a=checkRapport" method="post">
   <h1 style="margin-bottom:2%"> Consultation des rapports </h1>
   <p class=dateRapForm>Rapport saisie entre le <input class=dateRap type="date" id="date1" name="date1"> et le <input class=dateRap type="date" id="date2" name="date2"></p>
   <div>

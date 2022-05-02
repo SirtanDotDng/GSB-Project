@@ -1,7 +1,7 @@
 <div class="list">
 <h1> Praticiens </h1>
 
-<form action="http://gsb.mattatyalexis.fr/?c=menu&a=lePraticien" method="post" style="text-align: center;">
+<form action="https://gsb.mattatyalexis.fr/?c=menu&a=lePraticien" method="post" style="text-align: center;">
   <div>
   <p>Sélectionnez un praticien dont vous souhaitez connaître les informations :</p>
   <select name="idPra" id="idPra" style="width: 25%; margin: 3%;" required/>

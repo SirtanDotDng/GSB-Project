@@ -1,7 +1,7 @@
 <div class="list">
 <h1> Médicaments </h1>
 
-<form action="http://gsb.mattatyalexis.fr/?c=menu&a=leMedicament" method="post" style="text-align: center;">
+<form action="https://gsb.mattatyalexis.fr/?c=menu&a=leMedicament" method="post" style="text-align: center;">
   <div>
   <p>Sélectionnez un médicament dont vous souhaitez connaître les informations :</p>
   <select name="medDepotLeg" id="medDepotLeg" style="width: 25%; margin: 3%;" required/>

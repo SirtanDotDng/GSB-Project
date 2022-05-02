@@ -22,10 +22,10 @@ array_splice($lesRapports,7,1);
 for($i=0;$i<(count($lesRapports)-2);$i++){
   if(!is_null($lesRapports[$i])){
     if($lesRapports[$i] == getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM']){
-      echo "<div class='row'>".$infoRap[$i]."<a href='http://gsb.mattatyalexis.fr/?c=menu&a=lePraticien&pra=".$lesRapports[$i]."'> ".$lesRapports[$i].", ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_NOM']." ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_PRENOM']."</a></div>";
+      echo "<div class='row'>".$infoRap[$i]."<a href='https://gsb.mattatyalexis.fr/?c=menu&a=lePraticien&pra=".$lesRapports[$i]."'> ".$lesRapports[$i].", ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_NOM']." ".getLePra(getLesRapportsCol($_GET['mat'])[$_GET['rap']-1]['PRA_NUM'])[0]['PRA_PRENOM']."</a></div>";
     }else{
       if($i == 6){
-        echo "<div class='row'>".$infoRap[6]."<a href='http://gsb.mattatyalexis.fr/?c=menu&a=leMedicament&med=".$codeMed."'>".$lesRapports[6]."</a></div>";
+        echo "<div class='row'>".$infoRap[6]."<a href='https://gsb.mattatyalexis.fr/?c=menu&a=leMedicament&med=".$codeMed."'>".$lesRapports[6]."</a></div>";
       }else{
         echo "<div class='row'>".$infoRap[$i]." ".$lesRapports[$i]."</div>";
       }
@@ -33,7 +33,7 @@ for($i=0;$i<(count($lesRapports)-2);$i++){
   }
 }
 ?>
-<form class="leX" action="http://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportSearchD" method="post">
+<form class="leX" action="https://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportSearchD" method="post">
   <div style="text-align:center">
     <input style="font-size:14px; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
   </div>

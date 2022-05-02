@@ -9,7 +9,7 @@ if(isset($_POST['idPra'])){
   if(isset($_GET['pra']) && $_GET['pra'] != ""){
     $lePra = $_GET['pra'];
   }else{
-    echo "<script>window.location.href = 'http://gsb.mattatyalexis.fr/?c=menu&a=praticiens';</script>";
+    echo "<script>window.location.href = 'https://gsb.mattatyalexis.fr/?c=menu&a=praticiens';</script>";
   }
 }
   
@@ -20,7 +20,7 @@ for($i=0;$i<(count($lesColonnes))/2;$i++){
 }
 
 ?>
-  <form class="leX" action="http://gsb.mattatyalexis.fr/?c=menu&a=praticiens" method="post">
+  <form class="leX" action="https://gsb.mattatyalexis.fr/?c=menu&a=praticiens" method="post">
   <div style="text-align:center">
     <input style="font-size:14px; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
   </div>

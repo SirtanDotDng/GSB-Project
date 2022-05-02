@@ -6,7 +6,7 @@
             <img src='images/login0.jpg'>
             <div class="title">CONNEXION</div>
         </div>
-            <form style="margin:0%; padding-bottom:0%" method="post" action="http://gsb.mattatyalexis.fr/?c=compte&a=login">
+            <form style="margin:0%; padding-bottom:0%" method="post" action="https://gsb.mattatyalexis.fr/?c=compte&a=login">
                 <fieldset>
                     <legend>IDENTIFIANTS DE CONNEXION</legend>
                     <div>

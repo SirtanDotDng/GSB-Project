@@ -19,7 +19,7 @@ for($j=0;$j<(count(getLesRapportsAttente()));$j++){
   ?>
   <script type="text/javascript">
     document.getElementById("element<?php echo getLesRapportsAttente()[$j][1];?>").onclick = function () {
-        location.href = "http://gsb.mattatyalexis.fr/?c=rapports&a=modifierLeRapport&rap=<?php echo getLesRapportsAttente()[$j][1];?>";
+        location.href = "https://gsb.mattatyalexis.fr/?c=rapports&a=modifierLeRapport&rap=<?php echo getLesRapportsAttente()[$j][1];?>";
     };
   </script>
   <?php

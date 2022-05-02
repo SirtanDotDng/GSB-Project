@@ -18,7 +18,7 @@ $remplacant =   $leRapport[0][11];
 <div class="list" id="poi">
 <section class="newrap">
 <h1> Modifier le rapports n°<?php echo $rapport ?></h1>
-<form class="saisieRapport" action="?c=rapports&a=updateRapport&rap=<?php echo $leRapport ?>" method="post">
+<form class="saisieRapport" action="?c=rapports&a=updateRapport&rap=<?php echo $_GET['rap'] ?>" method="post">
     <div>
         <label for="rapDate">Date Rapport</label>
         <input value="<?php echo $date; ?>" class="casesinput" type="date" name="rapDate" id="rapDate" required/>

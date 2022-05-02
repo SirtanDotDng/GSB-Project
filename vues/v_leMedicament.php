@@ -9,7 +9,7 @@ if(isset($_POST['medDepotLeg'])){
   if(isset($_GET['med']) && $_GET['med'] != ""){
     $leMed = $_GET['med'];
   }else{
-    echo "<script>window.location.href = 'http://gsb.mattatyalexis.fr/?c=menu&a=medicaments';</script>";
+    echo "<script>window.location.href = 'https://gsb.mattatyalexis.fr/?c=menu&a=medicaments';</script>";
   }
 }  
 
@@ -20,7 +20,7 @@ for($i=0;$i<(count($lesColonnes))/2-1;$i++){
 }
 
 ?>
-  <form class="leX" action="http://gsb.mattatyalexis.fr/?c=menu&a=medicaments" method="post">
+  <form class="leX" action="https://gsb.mattatyalexis.fr/?c=menu&a=medicaments" method="post">
     <div style="text-align:center">
       <input style="font-size:14px; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
     </div>
