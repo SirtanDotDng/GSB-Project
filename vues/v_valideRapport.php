@@ -3,11 +3,10 @@
 <?php
 echo "<h1>Le rapport n°".$_GET['rap']." du collaborateur immatriculé ".$_GET['mat']." a bien été validé.</h1>";
 echo "<p>Vous allez être redirigé automatiquement</p>";
-setRapportValide($_GET['mat'], $_GET['rap']);
 ?>
 <script>
 setTimeout(function(){
-    window.location.href = 'https://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportNouveaux';
+    window.location.href = 'index.php?c=rapports&a=checkRapportNouveaux';
 }, 4000);
 </script>
 </div>

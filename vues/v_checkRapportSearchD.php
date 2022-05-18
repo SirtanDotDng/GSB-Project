@@ -1,4 +1,4 @@
-<form style='background:#fff;' class="shadow" action="https://gsb.mattatyalexis.fr/?c=rapports&a=checkRapportD" method="post">
+<form style='background:#fff;' class="shadow" action="index.php?c=rapports&a=checkRapportD" method="post">
   <h1 style="margin-bottom:2%"> Consultation des rapports </h1>
   <p class=dateRapForm>Rapport saisie entre le <input class=dateRap type="date" id="date1" name="date1"> et le <input class=dateRap type="date" id="date2" name="date2"></p>
   <div>
@@ -12,7 +12,7 @@
           <label for="collaborateurSelected">Visiteur :</label>
               <select name="idCol" id="idCol" required/>
       			<option selected="selected" value="aucun"></option>
-                <?php foreach(getListeColReg() as $laLigne){ ?>
+                <?php foreach($listeColReg as $laLigne){ ?>
                	<option value=<?php echo $laLigne[2]; ?>><?php echo $laLigne[2]." ".$laLigne[0]." ".$laLigne[1]; ?></option>
                <?php } ?>
            </select>

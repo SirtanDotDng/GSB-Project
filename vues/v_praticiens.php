@@ -1,11 +1,11 @@
 <div class="list">
 <h1> Praticiens </h1>
 
-<form action="https://gsb.mattatyalexis.fr/?c=menu&a=lePraticien" method="post" style="text-align: center;">
+<form action="index.php?c=menu&a=lePraticien" method="post" style="text-align: center;">
   <div>
   <p>Sélectionnez un praticien dont vous souhaitez connaître les informations :</p>
   <select name="idPra" id="idPra" style="width: 25%; margin: 3%;" required/>
-     <?php foreach(getListePra() as $laLigne){ ?>
+     <?php foreach($praticiens as $laLigne){ ?>
         <option value="<?php echo $laLigne['idPra'];?>"><?php echo $laLigne['Nom'].' '.$laLigne['Prenom']; ?></option>
      <?php } ?>
   </select>

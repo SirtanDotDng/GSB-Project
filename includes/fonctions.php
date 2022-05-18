@@ -10,7 +10,7 @@ function register($username, $password, $mail, $matricule, $type) {
   $req="INSERT INTO compte (username, password, Mail, COL_MATRICULE, ID_Type) VALUES (?,?,?,?,?)";  
   $query = $monPdo->prepare($req);
   $query->execute(array($username, $hash, $mail, $matricule, $type));
-      echo "<script>location.href='https://gsb.mattatyalexis.fr/?c=menu';</script>";
+      echo "<script>location.href='index.php?c=menu';</script>";
 }
 
 function changePassword($mail, $newpassword) {
@@ -35,10 +35,10 @@ function login($mail, $password) {
       $_SESSION['mail'] = $mail;
       $_SESSION['grade'] = $res[0][2];
       $_SESSION['matricule'] = $res[0][3];
-      echo "<script>location.href='https://gsb.mattatyalexis.fr/?c=menu';</script>";
+      echo "<script>location.href='index.php?c=menu';</script>";
     }
     else{
-      echo "<script>location.href='https://gsb.mattatyalexis.fr/?c=compte&a=formConnexion&x=erreur';</script>";
+      echo "<script>location.href='index.php?c=compte&a=formConnexion&x=erreur';</script>";
       deconnexion();
     }
 }
@@ -139,7 +139,7 @@ function editRapport($rapDate, $rapBilan, $rapSaisieDate, $rapEtat, $praNum, $me
     UPDATE rapport_visite SET RAP_saisie_date = ? WHERE COL_MATRICULE = ? AND rap_num = ?;
     UPDATE rapport_visite SET RAP_ETAT = ? WHERE COL_MATRICULE = ? AND rap_num = ?;
     UPDATE rapport_visite SET PRA_NUM = ? WHERE COL_MATRICULE = ? AND rap_num = ?;
-    UPDATE rapport_visite SET MED_DEPOTLEGAL = ?, WHERE COL_MATRICULE = ? AND rap_num = ?;
+    UPDATE rapport_visite SET MED_DEPOTLEGAL = ? WHERE COL_MATRICULE = ? AND rap_num = ?;
     UPDATE rapport_visite SET MED_DEPOTLEGAL_2 = ? WHERE COL_MATRICULE = ? AND rap_num = ?;
     UPDATE rapport_visite SET ID_motif = ? WHERE COL_MATRICULE = ? AND rap_num = ?;
     UPDATE rapport_visite SET motif_Autre = ? WHERE COL_MATRICULE = ? AND rap_num = ?;
@@ -147,20 +147,20 @@ function editRapport($rapDate, $rapBilan, $rapSaisieDate, $rapEtat, $praNum, $me
     
     $query=$monPdo->prepare($req);
     
-    if (strcmp($medDepotLeg, "") == 0){
+    if ($medDepotLeg == ""){
       $medDepotLeg = NULL;
     }
-    if (strcmp($medDepotLeg2, "") == 0){
-      $medDepotLeg = NULL;
+    if ($medDepotLeg2 == ""){
+      $medDepotLeg2 = NULL;
     }
-    if (strcmp($idMotif, "") == 0){
-      $medDepotLeg = NULL;
+    if ($idMotif == ""){
+      $idMotif = NULL;
     }
-    if (strcmp($motifAutre, "") == 0){
-      $medDepotLeg = NULL;
+    if ($motifAutre == ""){
+      $motifAutre = NULL;
     }
-    if (strcmp($remplacant, "") == 0){
-      $medDepotLeg = NULL;
+    if ($remplacant == ""){
+      $remplacant = NULL;
     }
 
     $query->execute(array(
@@ -333,6 +333,15 @@ function getInfoCol() {
   return $res;
 }
 
+function getLeMotifById($id) {
+  $monPdo = connexionPDO();
+  $req="SELECT lib_motif FROM visite_motif WHERE ID_motif = ?";
+  $query=$monPdo->prepare($req);
+  $query->execute(array($id));
+  $res=$query->fetchAll();
+  return $res;
+}
+
 function isConnected() {
 
     $connected = false;
@@ -346,7 +355,7 @@ function deconnexion() {
 
     session_unset();
     session_destroy();
-    echo "<script>location.href='https://gsb.mattatyalexis.fr';</script>";
+    echo "<script>location.href='index.php';</script>";
 }
 
 ?>

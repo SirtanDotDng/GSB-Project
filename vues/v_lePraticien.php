@@ -1,26 +1,13 @@
 <div class="list" >
 <?php
 
-$indicPra = array ("Matricule", "Code", "Nom", "Prénom", "Adresse", "Code Postal", "Ville", "Notoriété", "Confiance", "Type");
-
-if(isset($_POST['idPra'])){
-  $lePra = $_POST['idPra'];
-}else{
-  if(isset($_GET['pra']) && $_GET['pra'] != ""){
-    $lePra = $_GET['pra'];
-  }else{
-    echo "<script>window.location.href = 'https://gsb.mattatyalexis.fr/?c=menu&a=praticiens';</script>";
-  }
-}
-  
-$lesColonnes=getLePra($lePra)[0];
-echo "<h1>".$lesColonnes['PRA_NOM']." ".$lesColonnes['PRA_PRENOM']."</h1>";
-for($i=0;$i<(count($lesColonnes))/2;$i++){
-  echo "<div class='row'>".$indicPra[$i]." : ".$lesColonnes[$i]."</div>";
+echo "<h1>".$praticien['PRA_NOM']." ".$praticien['PRA_PRENOM']."</h1>";
+for($i=0;$i<(count($praticien))/2;$i++){
+  echo "<div class='row'>".$indicPra[$i]." : ".$praticien[$i]."</div>";
 }
 
 ?>
-  <form class="leX" action="https://gsb.mattatyalexis.fr/?c=menu&a=praticiens" method="post">
+  <form class="leX" action="index.php?c=menu&a=praticiens" method="post">
   <div style="text-align:center">
     <input style="font-size:14px; width:25%; border-radius:0px; box-shadow:none; height:32px;" class="btn btn-warning bouton" type="submit" name="bouton" value="Retour">
   </div>

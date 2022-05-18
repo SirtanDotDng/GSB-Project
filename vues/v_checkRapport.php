@@ -1,6 +1,7 @@
 <h1> Consultation des rapports </h1>
 
 <?php
+echo 'SUCE MA BITE';
 $infoRap = array("Matricule :","Date du rapport :","Bilan :","Date de saisie :","Etat :","Numéro du praticien visité :","Médicament(s) présenté(s) :","Motif de la visite :","Autre motif :","Remplacant :");
 for($j=0;$j<(getNumRapport()-1);$j++){
   $lesRapports = array();

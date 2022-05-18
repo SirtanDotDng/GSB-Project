@@ -1,124 +1,108 @@
-<?php 
-$leRapport = getLeRapportAttente($_GET['rap']);
-
-$matricule =    $leRapport[0][0];
-$rapport =      $leRapport[0][1];
-$date =         $leRapport[0][2];
-$bilan =        $leRapport[0][3];
-$saisie =       $leRapport[0][4];
-$etat =         $leRapport[0][5];
-$praticien =    $leRapport[0][6];
-$medicament1 =  $leRapport[0][7];
-$medicament2 =  $leRapport[0][8];
-$motif =        $leRapport[0][9];
-$autreMotif =   $leRapport[0][10];
-$remplacant =   $leRapport[0][11];
-?>
-
 <div class="list" id="poi">
-<section class="newrap">
-<h1> Modifier le rapports n°<?php echo $rapport ?></h1>
-<form class="saisieRapport" action="?c=rapports&a=updateRapport&rap=<?php echo $_GET['rap'] ?>" method="post">
-    <div>
-        <label for="rapDate">Date Rapport</label>
-        <input value="<?php echo $date; ?>" class="casesinput" type="date" name="rapDate" id="rapDate" required/>
-    </div>
-    <div>
-        <label for="rapBilan">Bilan Rapport</label>
-        <textarea class="casesinput" type="text" name="rapBilan" id="rapBilan" required/><?php echo $bilan; ?></textarea>
-    </div>
-    <div>
-        <label for="praNum">Praticien</label>
-        <select name="praNum" id="praNum" required/>
-            <?php foreach(getListePra() as $laLigne){ ?>
-            	<option value="<?php echo $laLigne['idPra'];?>"<?php if($laLigne['idPra'] == $praticien)echo "selected";?>><?php echo $laLigne['Nom']; echo " "; echo $laLigne['Prenom'] ?></option>
-      		<?php } ?>
-        </select>
-    </div>
-    <div>
-        <label for="medDepotLeg">Nom Médicament</label>
-        <select name="medDepotLeg" id="medDepotLeg" />
-      		<option selected="selected" value=""></option>
-            <?php foreach(getListeMed() as $laLigne){ ?>
-            <option value="<?php echo $laLigne['idMed'];?>"<?php if($laLigne['idMed'] == $medicament1)echo "selected";?>><?php echo $laLigne['Nom commercial']; ?></option>
-      		<?php } ?>
-        </select>
-    </div>
-    <div>
-    <label for="medDepotLeg2">Nom Médicament</label>
-        <select name="medDepotLeg2" id="medDepotLeg2"/>
-      		<option selected="selected" value=""></option>
-            <?php foreach(getListeMed() as $laLigne){ ?>
-            <option value="<?php echo $laLigne['idMed'];?>"<?php if($laLigne['idMed'] == $medicament2)echo "selected";?>><?php echo $laLigne['Nom commercial']; ?></option>
-      		<?php } ?>
-        </select>
-    </div>
-	<div>
-        <label for="idMotif">Motif</label>
-        <select name="idMotif" id="idMotif" />
-                <option value="0" <?php if(0 == $motif)echo "selected";?>>Autre</option>
-      			<option value="1" <?php if(1 == $motif)echo "selected";?>>Périodique</option>
-      			<option value="2" <?php if(2 == $motif)echo "selected";?>>Actualisation</option>
-      	</select>
-	</div>
+    <section class="newrap">
+        <h1> Modifier le rapports n°<?php echo $rapport ?></h1>
+            <form class="saisieRapport" action="?c=rapports&a=updateRapport&rap=<?php echo $_GET['rap'] ?>" method="post">
+                <div>
+                    <label for="rapDate">Date Rapport</label>
+                    <input value="<?php echo $date; ?>" class="casesinput" type="date" name="rapDate" id="rapDate" required/>
+                </div>
+                <div>
+                    <label for="rapBilan">Bilan Rapport</label>
+                    <textarea class="casesinput" type="text" name="rapBilan" id="rapBilan" required/><?php echo $bilan; ?></textarea>
+                </div>
+                <div>
+                    <label for="praNum">Praticien</label>
+                    <select name="praNum" id="praNum" required/>
+                        <?php foreach($praticiens as $laLigne){ ?>
+                            <option value="<?php echo $laLigne['idPra'];?>"<?php if($laLigne['idPra'] == $praticien)echo "selected";?>><?php echo $laLigne['Nom']; echo " "; echo $laLigne['Prenom'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div>
+                    <label for="medDepotLeg">Nom Médicament</label>
+                    <select name="medDepotLeg" id="medDepotLeg" />
+                        <option selected="selected" value=""></option>
+                        <?php foreach($medicaments as $laLigne){ ?>
+                        <option value="<?php echo $laLigne['idMed'];?>"<?php if($laLigne['idMed'] == $medicament1)echo "selected";?>><?php echo $laLigne['Nom commercial']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div>
+                <label for="medDepotLeg2">Nom Médicament</label>
+                    <select name="medDepotLeg2" id="medDepotLeg2"/>
+                        <option selected="selected" value=""></option>
+                        <?php foreach($medicaments as $laLigne){ ?>
+                        <option value="<?php echo $laLigne['idMed'];?>"<?php if($laLigne['idMed'] == $medicament2)echo "selected";?>><?php echo $laLigne['Nom commercial']; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div>
+                    <label for="idMotif">Motif</label>
+                    <select name="idMotif" id="idMotif" />
+                            <option value="0" <?php if(0 == $motif)echo "selected";?>>Autre</option>
+                            <option value="1" <?php if(1 == $motif)echo "selected";?>>Périodique</option>
+                            <option value="2" <?php if(2 == $motif)echo "selected";?>>Actualisation</option>
+                            <option value="3" <?php if(3 == $motif)echo "selected";?>>Nouveauté</option>
+                    </select>
+                </div>
 
-	<div id="motifTitle">
-        <label for="motifAutre">Motif Autre</label>
-        <input value="<?php echo $autreMotif; ?>"class="casesinput" type="text" name="motifAutre" id="motifAutre" />
-    </div>
+                <div id="motifTitle">
+                    <label for="motifAutre">Motif Autre</label>
+                    <input value="<?php echo $autreMotif; ?>"class="casesinput" type="text" name="motifAutre" id="motifAutre" />
+                </div>
 
-    <script>
-    var ddl = document.getElementById("idMotif");
-    ddl.onchange=hideMotif;
-    function hideMotif()
-    {   
-        var ddl = document.getElementById("idMotif");
-        var selectedValue = ddl.options[ddl.selectedIndex].value;
-
-
-        if (selectedValue == "0")
-        {   document.getElementById("motifTitle").style.display = "block";
-        }
-        else
-        {
-           document.getElementById("motifTitle").style.display = "none";
-        }
-    }
-    </script>
-
-    <div>
-        <label for="remplacant">Remplacant Praticien</label>
-        <select name="remplacant" id="remplacant"/>
-      	<option selected="selected" value=""></option>
-            <?php foreach(getListePra() as $laLigne){ ?>
-            	<option value="<?php echo $laLigne['idPra'];?>"<?php if($laLigne['idPra'] == $remplacant)echo "selected";?>><?php echo $laLigne['Nom']; echo " "; echo $laLigne['Prenom'] ?></option>
-      		<?php } ?>
-        </select>
-    </div><br>
+                <script>
+                var ddl = document.getElementById("idMotif");
+                ddl.onchange=hideMotif;
+                function hideMotif()
+                {   
+                    var ddl = document.getElementById("idMotif");
+                    var selectedValue = ddl.options[ddl.selectedIndex].value;
 
 
+                    if (selectedValue == "0")
+                    {   document.getElementById("motifTitle").style.display = "block";
+                    }
+                    else
+                    {
+                    document.getElementById("motifTitle").style.display = "none";
+                    }
+                }
+                </script>
 
-	<div id="cont">
-    <table style="width:100%" id="empTable">
-  
-            <tr>
-                <th></th>
-                <th>Quantité</th>
-                <th>Médicament</th>
-            </tr>
+                <div>
+                    <label for="remplacant">Remplacant Praticien</label>
+                    <select name="remplacant" id="remplacant"/>
+                    <option selected="selected" value=""></option>
+                        <?php foreach($praticiens as $laLigne){ ?>
+                            <option value="<?php echo $laLigne['idPra'];?>"<?php if($laLigne['idPra'] == $remplacant)echo "selected";?>><?php echo $laLigne['Nom']; echo " "; echo $laLigne['Prenom'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div><br>
+
+
+
+                <div id="cont">
+                <table style="width:100%" id="empTable">
             
-    </table>
-    </div>
-    
-    <div>
-        <label for="rapEtat">Saisie définitive |</label>
-        <input name="rapEtat" type="checkbox" value="1"/>
-	</div>
-<div style="text-align:center">
-	    <input style="margin-top:1%; font-size:14px" class="addechantillon" type="submit" name="bouton" value="Enregistrer">
-	</div>
-</section>
-</form>
+                        <tr>
+                            <th></th>
+                            <th>Quantité</th>
+                            <th>Médicament</th>
+                        </tr>
+                        
+                </table>
+                </div>
+                
+                <div>
+                    <label for="rapEtat">Saisie définitive |</label>
+                    <input name="rapEtat" type="checkbox" value="1"/>
+                </div>
+            <div style="text-align:center">
+                    <input style="margin-top:1%; font-size:14px" class="addechantillon" type="submit" name="bouton" value="Enregistrer">
+                </div>
+            </section>
+        </form>
 </div>
 
 <script>
@@ -128,7 +112,7 @@ $remplacant =   $leRapport[0][11];
 
 
 
-	var nbEchantillon = <?php echo getNbEchantillon($_GET['rap'])[0];?>;
+	var nbEchantillon = <?php echo $nbEchantillons[0];?>;
 
     function init(){
     
@@ -183,7 +167,7 @@ $remplacant =   $leRapport[0][11];
                     option.text = '';
                     med.appendChild(option);
 
-                    <?php foreach(getListeMed() as $leMed){ ?>
+                    <?php foreach($medicaments as $leMed){ ?>
                         var option = document.createElement("option");
                         option.setAttribute('value',"<?php echo $leMed['idMed'] ?>");
                         option.text ="<?php echo $leMed['Nom commercial']?>";
@@ -235,7 +219,7 @@ $remplacant =   $leRapport[0][11];
                     option.text = '';
                     med.appendChild(option);
 
-                    <?php foreach(getListeMed() as $leMed){ ?>
+                    <?php foreach($medicaments as $leMed){ ?>
                         var option = document.createElement("option");
                         option.setAttribute('value',"<?php echo $leMed['idMed'] ?>");
                         option.text ="<?php echo $leMed['Nom commercial']?>";
@@ -299,7 +283,7 @@ $remplacant =   $leRapport[0][11];
                     option.text = '';
                     med.appendChild(option);
 
-                    <?php foreach(getListeMed() as $laLigne){ ?>
+                    <?php foreach($medicaments as $laLigne){ ?>
                         var option = document.createElement("option");
                         option.setAttribute('value',"<?php echo $laLigne['idMed'] ?>");
                         option.text ="<?php echo $laLigne['Nom commercial']?>";
@@ -314,7 +298,7 @@ $remplacant =   $leRapport[0][11];
 
 
     function nbEchantillon(){
-        for( var i = 0; i < <?php echo getNbEchantillon($_GET['rap'])?>; i++){
+        for( var i = 0; i < <?php echo $nbEchantillons?>; i++){
             arrayTD.push('button'+i);
         }
     }
